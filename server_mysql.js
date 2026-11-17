@@ -55,6 +55,26 @@ connection.connect((err) => {
           return;
         }
       } );
+
+
+      const createTableProduto = `
+      CREATE TABLE IF NOT EXISTS produto(
+        id_produto BIGINT AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(255) NOT NULL,
+        tendencia VARCHAR(255),
+        novidade BOOLEAN,
+        preco_base DECIMAL(10,2) NOT NULL,
+        id_loja BIGINT NOT NULL,
+        id_categoria BIGINT NOT NULL,
+        INDEX idx_produto_categoria (id_categoria)
+      )`;
+
+    connection.query(createTableProduto, (err) => {
+        if (err) {
+          console.error('Erro ao criar tabela: ', err.stack );
+          return;
+        }
+      } );
             
 });
 
